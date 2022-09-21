@@ -24,5 +24,4 @@ class HomeController extends Controller
     public function work() {
     return view('pages.work');
      }
-
 }
