@@ -87,6 +87,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('student.index')->with('notif','berhasil diupdate cuy');
     }
 }
