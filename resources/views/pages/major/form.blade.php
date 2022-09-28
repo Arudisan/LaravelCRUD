@@ -9,11 +9,6 @@
 @endif
     @csrf
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label"> id </label>
-      <input type="text" class="form-control" name="id" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $major->id}}">
-      @error('id') <div class="text-muted"> {{$message}}</div> @enderror
-    </div>
-    <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Nama</label>
         <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $major->name}}">
       </div>

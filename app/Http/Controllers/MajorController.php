@@ -29,7 +29,6 @@ class MajorController extends Controller
         $major =new Major();
         return view ('pages.major.form',['major' =>$major]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +50,10 @@ class MajorController extends Controller
      */
     public function show(Major $major)
     {
-        //
+       // query ambil major yang idnya sesuai dg yang di url
+        // dan ambil seluruh studentsnya
+        $major = $major->load(['students'])->first();
+        return view('pages.major.list-student', compact('major'));
     }
 
     /**

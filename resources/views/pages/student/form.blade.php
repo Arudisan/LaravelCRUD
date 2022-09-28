@@ -30,10 +30,10 @@
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Major </label>
-        <select name="major" id="major" class="form-control">
-            <option value="informatika" {{ $student->major == 'informatika' ? 'selected' : '' }}> Informatika</option>
-            <option value="akuntansi" {{ $student->major == 'management' ? 'selected' : '' }}> Akuntansi</option>
-            <option value="agama" {{ $student->major == 'agama' ? 'selected' : '' }}> Agama </option>
+        <select name="major_id" id="major" class="form-control">
+            @foreach($majors as $major)
+                <option value="{{ $major->id }}">{{ $major->name }}</option>
+            @endforeach
            </select>
       </div>
     <button type="submit" class="btn btn-primary">Submit</button>

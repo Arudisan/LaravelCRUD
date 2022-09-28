@@ -9,4 +9,9 @@ class Major extends Model
 {
     use HasFactory;
     protected $fillable=['id','name','description'];
+
+    public function students()
+    {
+        return $this->hasmany(Student::class,"major_id","id");
+    }
 }

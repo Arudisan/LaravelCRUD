@@ -26,7 +26,7 @@
         <td>{{ $item->date_birth}}</td>
         <td>{{ $item->gender}}</td>
         <td>{{ $item->address}}</td>
-        <td>{{ $item->major}}</td>
+        <td>{{ $item->major->name}}</td>
         <td>
             <a href="{{route('student.edit',['student'=>$item->id]) }}" class="btn btn-primary">edit</a>
             <form action="{{ route('student.destroy',['student'=> $item->id]) }}" method="post">

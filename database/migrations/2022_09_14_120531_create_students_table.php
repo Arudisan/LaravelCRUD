@@ -19,8 +19,11 @@ class CreateStudentsTable extends Migration
             $table->date('date_birth');
             $table->enum('gender',['male','female']);
             $table->text('address');
-            $table->string('major')->nullable();
+            //$table->string('major')->nullable();
+            $table->integer('major_id');
             $table->timestamps();// klolom created_at, updated_at
+
+            //relationships
         });
     }
 
