@@ -17,8 +17,6 @@
     </div>
 </section>
 <!-- End Banner Hero -->
-
-
 <!-- Start Team Member -->
 <section class="container py-5">
     <div class="pt-5 pb-3 d-lg-flex align-items-center gx-5">
@@ -30,7 +28,6 @@
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
         </div>
-
         <div class="col-lg-9 row">
             <div class="team-member col-md-4">
                 <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-01.jpg" alt="Card image">

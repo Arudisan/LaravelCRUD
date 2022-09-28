@@ -13,7 +13,7 @@ class UpdateMajorRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateMajorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'required|max:50',
+            'name'=>'required|max:50',
+            'description'=>'required|max:100',
         ];
     }
 }
