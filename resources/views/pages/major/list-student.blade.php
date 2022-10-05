@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('content')
 <h3> Jurusan {{ $major->name }}   </h3>
 <p>Jumlah siswa {{count($major->students)  }}</p>
