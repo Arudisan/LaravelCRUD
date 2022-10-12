@@ -6,6 +6,8 @@ use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Major;
+use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -14,10 +16,36 @@ class StudentController extends Controller
 
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=Student::with(['major'])->paginate(10);
-        return view ('pages.student.list',['data'=>$data]);
+        $search = $request->input('search');
+        $filter = $request->input('filter');
+        $data = Student::with(['major']);
+
+        // if ($search) {
+        //     $data->where('name', 'like', "%$search%")
+        //         ->orWhere('address', 'like', "%$search%")
+        //         ->where('majors_id', '=', "$filter");
+        // }
+
+        if ($search) {
+            $data->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('address', 'like', "%$search%");
+            });
+        }
+
+        if ($filter) {
+            $data->where(function ($query) use ($filter) {
+                $query->where('major_id', '=', $filter);
+            });
+        }
+
+        $data = $data->paginate(10);
+        return view('pages.student.list', compact('data'), [
+            'judul' => "List Student",
+            'majors' => Major::get()
+        ]);
     }
 
     /**
@@ -27,11 +55,11 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $student =new Student();
-        $majors= Major::get();
-        return view ('pages.student.form',[
-            'student' =>$student,
-            'majors' =>$majors
+        $student = new Student();
+        $majors = Major::get();
+        return view('pages.student.form', [
+            'student' => $student,
+            'majors' => $majors,
         ]);
     }
 
@@ -43,9 +71,11 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        $data=$request->all();
+        $data = $request->all();
         Student::create($data);
-        return redirect()->route('student.index')->with('notif','berhasil diupdate cuy');
+        return redirect()
+            ->route('student.index')
+            ->with('notif', 'berhasil diupdate cuy');
     }
 
     /**
@@ -67,12 +97,12 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-       $majors= Major::get();
-       return view ('pages.student.form',[
-           'student' =>$student,
-           'majors' =>$majors,
-           'Judul'=>"edit form student"
-       ]);
+        $majors = Major::get();
+        return view('pages.student.form', [
+            'student' => $student,
+            'majors' => $majors,
+            'Judul' => 'edit form student',
+        ]);
     }
 
     /**
@@ -86,7 +116,9 @@ class StudentController extends Controller
     {
         $data = $request->all();
         $student->update($data);
-        return redirect()->route('student.index')->with('notif','berhasil diupdate cuy');
+        return redirect()
+            ->route('student.index')
+            ->with('notif', 'berhasil diupdate cuy');
     }
 
     /**
@@ -98,6 +130,8 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('student.index')->with('notif','berhasil diupdate cuy');
+        return redirect()
+            ->route('student.index')
+            ->with('notif', 'berhasil diupdate cuy');
     }
 }
